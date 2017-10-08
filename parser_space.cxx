@@ -4,7 +4,8 @@
 
 void printArray(const char * str) //holamundo
 {
-    int i;
+    printf("hola mundo");
+	int i;
     printf(":::DBG:::\n");
     for(i=0;i<strlen(str);i++)
 	    printf("0x%x %c\n",str[i],str[i]);
