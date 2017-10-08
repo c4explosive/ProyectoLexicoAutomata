@@ -22,13 +22,14 @@ int checkAlphaNum(char ch)
 void killBSpaces( char * str)
 {
      char *str2 = (char *)(malloc(N*sizeof(char)));
-     int i,j=0,read=0;
+     int i,j=0,read=0,realLen=0;
      for(i=0;i<strlen(str);i++)
      {
 	if(read)
 	{
 	    str2[j]=str[i];
 	    j++;
+	    realLen++;
 	}
 	else
 	{
@@ -36,14 +37,20 @@ void killBSpaces( char * str)
 	    {
 		str2[j]=str[i];
 	    	j++;
+		realLen++;
 		read=1;
 	    }
 	}
      }
-     for(i=0;i<strlen(str);i++)
+     //cout<<"::STR::"<<endl;
+     //printArray(str2);
+     //cout<<"::STR::"<<endl;
+     for(i=0;i<N;i++)
 	str[i]='\0';
-     for(i=0;i<strlen(str2);i++)
+     //printf("REALLEN:: %d\n",realLen);
+     for(i=0;i<realLen;i++)
 	str[i]=str2[i];
+
 
 }
 
@@ -55,10 +62,15 @@ void separateStrs(char * str, char * newStr)
 
     //strcpy(str,"welcome to the job");
     killBSpaces(str);
+    /*cout<<"::RAW TRACE::"<<endl;
+    printArray(str);
+    cout<<"::RAW TRACE::"<<endl;*/
     for(i=0;i<strlen(str);i++)
     {
 	ch=str[i];
-	if(ch==0x20 || ch==0xa || ch==0x09)
+	if(ch == 0x09)
+	    ch=0x20;
+	if(ch==0x20 || ch==0xa)
 	{
 	    ant=ch;
 	    continue;
@@ -69,8 +81,11 @@ void separateStrs(char * str, char * newStr)
 	{
 	    if(ch != 0x20)
 	    {
-	    	newStr[j]=0x20;
-	    	j++;
+		if(i!=0)
+		{
+	    	    newStr[j]=0x20;
+	    	    j++;
+		}
 	    	newStr[j]=ch;
 	    }
 	}
