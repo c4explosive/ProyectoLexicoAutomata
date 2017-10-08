@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void printArray(const char * str)
+void printArray(const char * str) //holamundo
 {
     int i;
     printf(":::DBG:::\n");
