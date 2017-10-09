@@ -58,24 +58,35 @@ void separateStrs(char * str, char * newStr)
 {
     int i,j=0;
     int spaceC=0;
-    char ant=0x41,ch;
+    char ant,ch;
 
     //strcpy(str,"welcome to the job");
     killBSpaces(str);
     /*cout<<"::RAW TRACE::"<<endl;
     printArray(str);
     cout<<"::RAW TRACE::"<<endl;*/
+    ant=str[0];
     for(i=0;i<strlen(str);i++)
     {
 	ch=str[i];
 	if(ch == 0x09)
 	    ch=0x20;
+	if(ch >= 0x41 && ch <= 0x5a)
+		ch+=0x20;
 	if(ch==0x20 || ch==0xa)
 	{
 	    ant=ch;
 	    continue;
 	}
-	if(checkAlphaNum(ch) && checkAlphaNum(ant))
+	if(checkAlphaNum(ch) && checkAlphaNum(ant) ||
+	(ch == 0x3d && ant == 0x3c) ||
+	(ch == 0x3e && ant == 0x3c) ||
+	(ch == 0x3c && ant == 0x3a) ||
+	(ch == 0x2d && ant == 0x3c) ||
+	(ch == 0x3d && ant == 0x3d) ||
+	(ch == 0x3d && ant == 0x7e) ||
+	(ch == 0x2d && ant == 0x2d)
+	)
 	    newStr[j]=ch;
 	else
 	{

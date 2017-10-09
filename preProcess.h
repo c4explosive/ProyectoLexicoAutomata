@@ -1,13 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
+#include "LexSeparator.h"
 
-
-#define N 500
-
-
-using namespace std;
 
 void printArray(const char * str); //holamundo
 
