@@ -57,6 +57,14 @@ void Tokens::autoManager()
     flag=autoDigits();
     if(flag)
 	return;
+    flag=autoUVar();
+    if(flag)
+	return;
+    if(flag == 0)
+    {
+	lx->setType(INVALIDO);
+	return;
+    }
    
 }
 
@@ -106,7 +114,7 @@ int Tokens::autoArit()
     for(i=0; i<strlen(lx->getLex());i++)
     {
         ch=lx->getLex()[i]; 
-	if(ch == 0x2b || ch == 0x2c)
+	if((ch == 0x2b || ch == 0x2d) && strlen(lx->getLex()) == 1)
 	{
 		lx->setType(OPER_AR);
 		return 1;
@@ -117,12 +125,57 @@ int Tokens::autoArit()
 
 int Tokens::autoComp()
 {
-    return 1;
+    int i;
+    char ch, sig;
+    ch=lx->getLex()[0];
+    sig=lx->getLex()[1];
+    if(ch == 0x3c)
+    {
+	lx->setType(OPER_COMP);
+	return 1;
+    }
+
+    if(ch == 0x3e)
+    {
+	lx->setType(OPER_COMP);
+	return 1;
+    }
+    if( strlen(lx->getLex()) == 2)
+    {
+	    if(ch == 0x3d && sig == 0x3d)
+	    {
+		lx->setType(OPER_COMP);
+		return 1;
+	    }
+	    if(ch == 0x3c && sig == 0x3d)
+	    {
+		lx->setType(OPER_COMP);
+		return 1;
+	    }
+	    if(ch == 0x3e && sig == 0x3d)
+	    {
+		lx->setType(OPER_COMP);
+		return 1;
+	    }
+	    if(ch == 0x7e && sig == 0x3d)
+	    {
+		lx->setType(OPER_COMP);
+		return 1;
+	    }
+      }
+      return 0;
 }
 
 int Tokens::autoFLine()
 {
-    return 1;
+    char ch, sig;
+    ch=lx->getLex()[0];
+    if(ch == 0x3b)
+    {
+	lx->setType(FINAL_LINEA);
+    	return 1;
+    }
+    return 0;
 }
 
 int Tokens::autoAsig()
@@ -136,17 +189,58 @@ int Tokens::autoAsig()
 	lx->setType(OPER_ASIG);
     	return 1;
     }
-    //TODO: CONTINUE HERE!!
+    if(ch==0x3a && sig==0x3d)
+    {
+	lx->setType(OPER_ASIG);
+	return 1;
+    }
+    if(ch==0x3c && sig==0x2d)
+    {
+	lx->setType(OPER_ASIG);
+	return 1;
+    }
+    return 0;
 }
 
 int Tokens::autoComment()
 {
-    return 1;
+    char ch, sig;
+    ch=lx->getLex()[0];
+    sig=lx->getLex()[1];
+    if(ch==0x2d && sig==0x2d && strlen(lx->getLex()) == 2)
+    {
+	lx->setType(COMENTARIO);
+	return 1;
+    }
+
+    return 0;
 }
 
 int Tokens::autoDigits()
 {
+    int i;
+    char ch;
+    for(i=0;i<strlen(lx->getLex());i++)
+    {
+    	ch=lx->getLex()[i];
+	if(!(ch >= 0x30 && ch<=0x39))
+		return 0;
+    }
+    lx->setType(DIGITOS);
     return 1;
+}
+
+int Tokens::autoUVar()
+{
+    int i;
+    char ch;
+    ch=lx->getLex()[0];
+    if(ch >= 0x61 && ch <= 0x7a)
+    {
+	lx->setType(VARIABLE_USER);
+	return 1;
+    }
+    return 0;
 }
 
 void Tokens::whatType()
@@ -179,6 +273,9 @@ void Tokens::whatType()
 		break;
 	case DIGITOS:
 		cout<<" -> Digitos/Numeros"<<endl;
+		break;
+	case VARIABLE_USER:
+		cout<<" -> Variable de usuario"<<endl;
 		break;
 	case INVALIDO:
 		cout<<" -> Error Lexico // Token no encontrado"<<endl;

@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     separateStrs(str, newStr);
     //printArray(newStr);
     LexSeparator lxs = LexSeparator(newStr);
-    cout<<"String P:: "<<lxs.getStr()<<endl;
+    cout<<"Instruccion normalizada:: "<<lxs.getStr()<<endl;
     lxs.splitLexs();
     Tokens tks = Tokens();
     for(i=0; i<lxs.getNLex(); i++)

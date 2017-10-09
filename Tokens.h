@@ -12,12 +12,13 @@ private:
     int autoFLine();
     int autoComment();
     int autoDigits();
+    int autoUVar();
     void autoManager();
     void whatType();
     int compareStr(char*, char *);
 
 public:
-    enum tTokens { PALABRA_RESERVADA, AGRUPACION, OPER_AR, OPER_ASIG, OPER_COMP, FINAL_LINEA, COMENTARIO, DIGITOS, INVALIDO};
+    enum tTokens { PALABRA_RESERVADA, AGRUPACION, OPER_AR, OPER_ASIG, OPER_COMP, FINAL_LINEA, COMENTARIO, DIGITOS, VARIABLE_USER ,INVALIDO};
     char ** paReserv;
     Tokens();
     void setLx(Lexema * lx);

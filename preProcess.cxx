@@ -80,10 +80,10 @@ void separateStrs(char * str, char * newStr)
 	}
 	if(checkAlphaNum(ch) && checkAlphaNum(ant) ||
 	(ch == 0x3d && ant == 0x3c) ||
-	(ch == 0x3e && ant == 0x3c) ||
-	(ch == 0x3c && ant == 0x3a) ||
+	(ch == 0x3d && ant == 0x3a) ||
 	(ch == 0x2d && ant == 0x3c) ||
 	(ch == 0x3d && ant == 0x3d) ||
+	(ch == 0x3d && ant == 0x3e) ||
 	(ch == 0x3d && ant == 0x7e) ||
 	(ch == 0x2d && ant == 0x2d)
 	)
