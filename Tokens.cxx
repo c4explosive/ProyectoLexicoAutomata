@@ -4,21 +4,30 @@ Tokens::Tokens()
     nPR=8;
     char paReserv [][500]={"abrir","cerrar","subir","bajar","llamar","activar_emergencia","if","var"};
 
-    this->paReserv = (char **)malloc(nPR*sizeof(char *));
+    this->paReserv = (char **)malloc(20*sizeof(char *));
     for(int i=0; i<nPR; i++)
+    {
 	this->paReserv[i]=paReserv[i];
-
+    }
     //printf("Esto es raro %s\n", this->paReserv[7]);
 }
 
 void Tokens::setLx(Lexema *lx)
 {
     this->lx=lx;
+    //cout<<"WAIT:: "<<this->paReserv[7]<<endl;
+    //cout<<"LEXXS: "<<lx->getLex()<<endl;
 }
 
 Lexema * Tokens::getLx()
 {
     return this->lx;
+}
+
+void Tokens::autoCall()
+{
+    autoManager();
+    whatType();
 }
 
 void Tokens::autoManager()
@@ -51,19 +60,59 @@ void Tokens::autoManager()
    
 }
 
+int Tokens::compareStr(char *str1, char *str2)
+{
+    int i;
+    for(i=0;i<strlen(str1);i++)
+	    if(str1[i] != str2[i])
+		return 0;
+    return 1;
+}
+
 int Tokens::autoReserv()
 {
-    return 1;
+    int i,j;
+    for(i=0;i<nPR;i++)
+    {
+	if( compareStr(paReserv[i], lx->getLex()))
+	{
+		lx->setType(PALABRA_RESERVADA);
+    		return 1;
+	}
+    }
+    return 0;
 }
 
 int Tokens::autoAgrup()
 {
-    return 1;
+    int i;
+    char ch;
+    for(i=0;i<strlen(lx->getLex());i++)
+    {
+        ch=lx->getLex()[i]; 
+    	if(ch == 0x28 || ch == 0x29 || ch == 0x7b || ch == 0x7d)
+	{
+		lx->setType(AGRUPACION);
+		return 1;
+	}
+    }
+    return 0;
 }
 
 int Tokens::autoArit()
-{
-    return 1;
+{   
+    int i;
+    char ch;
+    for(i=0; i<strlen(lx->getLex());i++)
+    {
+        ch=lx->getLex()[i]; 
+	if(ch == 0x2b || ch == 0x2c)
+	{
+		lx->setType(OPER_AR);
+		return 1;
+	}
+    }
+    return 0;
 }
 
 int Tokens::autoComp()
@@ -78,7 +127,16 @@ int Tokens::autoFLine()
 
 int Tokens::autoAsig()
 {
-    return 1;
+    int i;
+    char ch, sig;
+    ch=lx->getLex()[0];
+    sig=lx->getLex()[1];
+    if(ch == 0x3d && strlen(lx->getLex())==1)
+    {
+	lx->setType(OPER_ASIG);
+    	return 1;
+    }
+    //TODO: CONTINUE HERE!!
 }
 
 int Tokens::autoComment()
@@ -102,7 +160,7 @@ void Tokens::whatType()
        		cout<<" -> Palabra reservada"<<endl;
 		break;
 	case AGRUPACION:
-       		cout<<" -> Signos de arupacion"<<endl;
+       		cout<<" -> Signos de Agrupacion"<<endl;
 		break;
 	case OPER_AR:
 		cout<<" -> Operador Aritmetico"<<endl;

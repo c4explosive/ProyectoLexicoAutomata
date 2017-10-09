@@ -1,13 +1,12 @@
 #include "parser_space.h"
 
-
-
 int main(int argc, char* argv[])
 {
     char bstr[]="welcome to the job( ) u";
     char str[N];
     char * newStr = (char *) (malloc(200*sizeof(char)));
     char * buffer;
+    int i;
     cout<<"Ingrese una instruccion: ";
     //scanf("%[^\n]",str);
     cin.getline(str,N);
@@ -16,8 +15,11 @@ int main(int argc, char* argv[])
     LexSeparator lxs = LexSeparator(newStr);
     cout<<"String P:: "<<lxs.getStr()<<endl;
     lxs.splitLexs();
-    for(int i=0; i<lxs.getNLex(); i++)
-    	cout<<"GET MY FIRST LEX: "<<i<<" ~ "<<lxs.getLexemas()[i].getLex()<<endl;
     Tokens tks = Tokens();
+    for(i=0; i<lxs.getNLex(); i++)
+    {
+    	tks.setLx(&lxs.getLexemas()[i]);
+    	tks.autoCall();
+    }
 }
 
