@@ -2,16 +2,18 @@
 
 int main(int argc, char* argv[])
 {
-    char bstr[]="welcome to the job( ) u";
     char str[N];
     char * newStr = (char *) (malloc(200*sizeof(char)));
-    char * buffer;
     int i;
     cout<<"Ingrese una instruccion: ";
-    //scanf("%[^\n]",str);
     cin.getline(str,N);
-    separateStrs(str, newStr);
-    //printArray(newStr);
+    
+    if (separateStrs(str, newStr) < 0)
+    {
+	printf("Instruccion vacía, abortando...\n");
+    	return 1;
+    }
+
     LexSeparator lxs = LexSeparator(newStr);
     cout<<"Instruccion normalizada:: "<<lxs.getStr()<<endl;
     lxs.splitLexs();
@@ -20,6 +22,12 @@ int main(int argc, char* argv[])
     {
     	tks.setLx(&lxs.getLexemas()[i]);
     	tks.autoCall();
-    }
-}
+	cout<<"El lexema es: "<<tks.getLx()->getLex();
+    	cout<<" -> "<<tks.getMsgType()<<endl;
 
+    }
+    return 0;
+}
+//TODO:
+//Hacer tabla de simbolos
+//Arreglar lo del comentario pegado

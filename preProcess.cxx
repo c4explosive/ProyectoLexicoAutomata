@@ -54,14 +54,15 @@ void killBSpaces( char * str)
 
 }
 
-void separateStrs(char * str, char * newStr)
+int separateStrs(char * str, char * newStr)
 {
     int i,j=0;
     int spaceC=0;
     char ant,ch;
-
-    //strcpy(str,"welcome to the job");
+        //strcpy(str,"welcome to the job");
     killBSpaces(str);
+    if(strlen(str)==0)
+	return -9;
     /*cout<<"::RAW TRACE::"<<endl;
     printArray(str);
     cout<<"::RAW TRACE::"<<endl;*/
@@ -104,5 +105,6 @@ void separateStrs(char * str, char * newStr)
 	j++;
     }
     //printf("STR:: %s\n", newStr);
+    return 0;
 }
 

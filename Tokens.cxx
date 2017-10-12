@@ -2,14 +2,29 @@
 Tokens::Tokens()
 {
     nPR=8;
+    int i;
     char paReserv [][500]={"abrir","cerrar","subir","bajar","llamar","activar_emergencia","if","var"};
-
+    this->msGS = (char **) malloc(20*sizeof(char *));
     this->paReserv = (char **)malloc(20*sizeof(char *));
-    for(int i=0; i<nPR; i++)
-    {
+    this->msgType = (char*)malloc(500*sizeof(char));
+    for(i=0; i<nPR; i++)
 	this->paReserv[i]=paReserv[i];
-    }
-    //printf("Esto es raro %s\n", this->paReserv[7]);
+    msgs=10;
+    char msGS[][100] = {
+	    "Palabra reservada", // PALABRA_RESERVADA
+	    "Signos de Agrupacion", //AGRUPACION
+	    "Operador Aritmetico", //OPER_AR
+	    "Operador de Asignacion", //OPER_ASIG
+	    "Operador de Comparacion", //OPER_COMP
+	    "Final de linea", //FINAL_LINEA
+	    "Comentario", //COMENTARIO
+	    "Digitos/Numeros", //DIGITOS
+	    "Variable de usuario", //VARIABLE_USER
+	    "Error Lexico // Token no encontrado" //INVALIDO
+    };
+
+    for(i=0;i<msgs;i++)
+	    this->msGS[i]=msGS[i];
 }
 
 void Tokens::setLx(Lexema *lx)
@@ -227,7 +242,10 @@ int Tokens::autoDigits()
 		return 0;
     }
     lx->setType(DIGITOS);
-    return 1;
+    if(strlen(lx->getLex()) <= 2 )
+    	return 1;
+    else
+	return 0;
 }
 
 int Tokens::autoUVar()
@@ -247,43 +265,11 @@ void Tokens::whatType()
 {
     int type;
     type=lx->getType();
-    cout<<"El lexema es: "<<lx->getLex();
-    switch(type)
-    {
-	case PALABRA_RESERVADA:
-       		cout<<" -> Palabra reservada"<<endl;
-		break;
-	case AGRUPACION:
-       		cout<<" -> Signos de Agrupacion"<<endl;
-		break;
-	case OPER_AR:
-		cout<<" -> Operador Aritmetico"<<endl;
-		break;
-	case OPER_ASIG:
-		cout<<" -> Operador de Asignacion"<<endl;
-		break;
-	case OPER_COMP:
-		cout<<" -> Operador de Comparacion"<<endl;
-		break;
-	case FINAL_LINEA:
-		cout<<" -> Final de linea"<<endl;
-		break;
-	case COMENTARIO:
-		cout<<" -> Comentario"<<endl;
-		break;
-	case DIGITOS:
-		cout<<" -> Digitos/Numeros"<<endl;
-		break;
-	case VARIABLE_USER:
-		cout<<" -> Variable de usuario"<<endl;
-		break;
-	case INVALIDO:
-		cout<<" -> Error Lexico // Token no encontrado"<<endl;
-		break;
-	default:
-		cout<<" -> Esto es mas que desconocido..."<<endl;
-		break;
-
-    }
+    this->msgType = (char*)malloc(500*sizeof(char));
+    strcpy(msgType,msGS[type]);
 }
 
+char *Tokens::getMsgType()
+{
+    return this->msgType;
+}

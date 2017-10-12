@@ -1,4 +1,6 @@
-#include "Tokens.h"
+#ifndef LEXSEPARATOR_H
+#define LEXSEPARATOR_H
+#include "SymbolsTable.h"
 #define lexN 50
 
 class LexSeparator
@@ -15,3 +17,4 @@ class LexSeparator
     int getNLex();
 
 };
+#endif
