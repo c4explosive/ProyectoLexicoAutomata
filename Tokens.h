@@ -30,6 +30,5 @@ public:
     Lexema * getLx();
     void autoCall();
     char *getMsgType();
-
 };
 #endif

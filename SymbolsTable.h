@@ -4,6 +4,10 @@
 #include "Lexema.h"
 class SymbolsTable
 {
-    int i,j;
+  private:
+    Lexema ** SymbolTable ;
+    int nSymbols;
+  public:
+    SymbolsTable();
 };
 #endif

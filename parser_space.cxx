@@ -30,4 +30,4 @@ int main(int argc, char* argv[])
 }
 //TODO:
 //Hacer tabla de simbolos
-//Arreglar lo del comentario pegado
+//Arreglar lo del comentario pegado ** --
