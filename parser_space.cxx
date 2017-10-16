@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     printf("Tabla de Símbolos\n");
     for(i=0; i<stb.getNSymbols(); i++)
     {
-	printf("[%i|0x%x|%s]\n",i+1,stb.getSymbolTable()[i], tks.getMsgType(stb.getSymbolTable()[i]->getType()));
+	printf("[%i|%s|0x%x|%s]\n",i+1,stb.getSymbolTable()[i]->getLex(),stb.getSymbolTable()[i], tks.getMsgType(stb.getSymbolTable()[i]->getType()));
     }
     return 0;
 }
