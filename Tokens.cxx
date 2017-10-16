@@ -86,6 +86,9 @@ void Tokens::autoManager()
 int Tokens::compareStr(char *str1, char *str2)
 {
     int i;
+    for(i=0;i<strlen(str2);i++)
+	    if(str1[i] != str2[i])
+		return 0;
     for(i=0;i<strlen(str1);i++)
 	    if(str1[i] != str2[i])
 		return 0;
@@ -272,4 +275,9 @@ void Tokens::whatType()
 char *Tokens::getMsgType()
 {
     return this->msgType;
+}
+
+char *Tokens::getMsgType(int type)
+{
+    return this->msGS[type];
 }

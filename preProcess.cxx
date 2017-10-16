@@ -60,7 +60,15 @@ int separateStrs(char * str, char * newStr)
     int spaceC=0;
     char ant,ch;
         //strcpy(str,"welcome to the job");
+
+    for (i=0; i<strlen(str);i++)
+    {
+	if(str[i] == 0x9)
+    	    str[i]=0x20;
+
+    }
     killBSpaces(str);
+  
     if(strlen(str)==0)
 	return -9;
     /*cout<<"::RAW TRACE::"<<endl;
@@ -70,8 +78,6 @@ int separateStrs(char * str, char * newStr)
     for(i=0;i<strlen(str);i++)
     {
 	ch=str[i];
-	if(ch == 0x09)
-	    ch=0x20;
 	if(ch >= 0x41 && ch <= 0x5a)
 		ch+=0x20;
 	if(ch==0x20 || ch==0xa)

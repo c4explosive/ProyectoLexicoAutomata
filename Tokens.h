@@ -18,7 +18,6 @@ private:
     int autoUVar();
     void autoManager();
     void whatType();
-    int compareStr(char*, char *);
     char ** paReserv;
     char ** msGS;
     char  *msgType;
@@ -27,8 +26,10 @@ public:
     enum tTokens { PALABRA_RESERVADA, AGRUPACION, OPER_AR, OPER_ASIG, OPER_COMP, FINAL_LINEA, COMENTARIO, DIGITOS, VARIABLE_USER ,INVALIDO};
     Tokens();
     void setLx(Lexema * lx);
+    static int compareStr(char*, char *);
     Lexema * getLx();
     void autoCall();
     char *getMsgType();
+    char *getMsgType(int);
 };
 #endif

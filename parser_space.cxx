@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
     }
 
     LexSeparator lxs = LexSeparator(newStr);
+    SymbolsTable stb = SymbolsTable();
     cout<<"Instruccion normalizada:: "<<lxs.getStr()<<endl;
     lxs.splitLexs();
     Tokens tks = Tokens();
@@ -24,10 +25,18 @@ int main(int argc, char* argv[])
     	tks.autoCall();
 	cout<<"El lexema es: "<<tks.getLx()->getLex();
     	cout<<" -> "<<tks.getMsgType()<<endl;
+	if(tks.getLx()->getType()!=tks.INVALIDO)
+		stb.addSymbols(&lxs.getLexemas()[i]);
 
+    }
+
+    printf("Tabla de Símbolos\n");
+    for(i=0; i<stb.getNSymbols(); i++)
+    {
+	printf("[%i|0x%x|%s]\n",i+1,stb.getSymbolTable()[i], tks.getMsgType(stb.getSymbolTable()[i]->getType()));
     }
     return 0;
 }
 //TODO:
-//Hacer tabla de simbolos
-//Arreglar lo del comentario pegado ** --
+//Verificar si esta en la tabla de simbolo (no repetir simbolos)
+//Arreglar lo del comentario pegado **   --foobarbaz
