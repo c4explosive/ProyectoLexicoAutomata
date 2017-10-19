@@ -1,14 +1,25 @@
 #include "Tokens.h"
+
 Tokens::Tokens()
+{
+   nPR=8;
+}
+
+Tokens::Tokens(SymbolsTable* stb)
 {
     nPR=8;
     int i;
-    char paReserv [][500]={"abrir","cerrar","subir","bajar","llamar","activar_emergencia","if","var"};
-    this->msGS = (char **) malloc(20*sizeof(char *));
-    this->paReserv = (char **)malloc(20*sizeof(char *));
+    this->msGS = (char **) malloc(200*sizeof(char *));
+    this->paReserv = (char **)malloc(50*sizeof(char *));
+    this->stbWords = (char **)malloc(50*sizeof(char *));
     this->msgType = (char*)malloc(500*sizeof(char));
+    this->stbWords=stb->getPaReserv();
     for(i=0; i<nPR; i++)
-	this->paReserv[i]=paReserv[i];
+    {
+    	this->paReserv[i]=this->stbWords[i];
+	//printf("PARESERC::: 0x%x\n",this->paReserv[i]);
+	//printf("TKSi:: %s\n",this->paReserv[i]);
+    }
     msgs=10;
     char msGS[][100] = {
 	    "Palabra reservada", // PALABRA_RESERVADA
@@ -23,8 +34,14 @@ Tokens::Tokens()
 	    "Error Lexico // Token no encontrado" //INVALIDO
     };
 
+
     for(i=0;i<msgs;i++)
-	    this->msGS[i]=msGS[i];
+    {
+	    this->msGS[i]=(char*) malloc(200*sizeof(char));
+	    //printf("MSGS::: %s\n",msGS[i]);
+	    strcpy(this->msGS[i],msGS[i]);
+	    //printf("THIS->MSGS::: %s\n",this->msGS[i]);
+    }
 }
 
 void Tokens::setLx(Lexema *lx)
@@ -84,8 +101,9 @@ void Tokens::autoManager()
 }
 
 int Tokens::compareStr(char *str1, char *str2)
-{
+{ 
     int i;
+
     for(i=0;i<strlen(str2);i++)
 	    if(str1[i] != str2[i])
 		return 0;
@@ -98,6 +116,7 @@ int Tokens::compareStr(char *str1, char *str2)
 int Tokens::autoReserv()
 {
     int i,j;
+    //printf("STR1:: 0x%x\n",paReserv[0]);
     for(i=0;i<nPR;i++)
     {
 	if( compareStr(paReserv[i], lx->getLex()))

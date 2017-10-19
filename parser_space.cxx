@@ -1,4 +1,5 @@
 #include "parser_space.h"
+#include "SymbolsTable.h"
 
 int main(int argc, char* argv[])
 {
@@ -16,9 +17,10 @@ int main(int argc, char* argv[])
 
     LexSeparator lxs = LexSeparator(newStr);
     SymbolsTable stb = SymbolsTable();
+    
     cout<<"Instruccion normalizada:: "<<lxs.getStr()<<endl;
     lxs.splitLexs();
-    Tokens tks = Tokens();
+    Tokens tks = Tokens(&stb);
     for(i=0; i<lxs.getNLex(); i++)
     {
     	tks.setLx(&lxs.getLexemas()[i]);
@@ -36,7 +38,9 @@ int main(int argc, char* argv[])
 	printf("[%i|%s|0x%x|%s]\n",i+1,stb.getSymbolTable()[i]->getLex(),stb.getSymbolTable()[i], tks.getMsgType(stb.getSymbolTable()[i]->getType()));
     }
     return 0;
+    
 }
+
 //TODO:
-//Verificar si esta en la tabla de simbolo (no repetir simbolos)
+//Agregar Palabras reservadas
 //Arreglar lo del comentario pegado **   --foobarbaz
