@@ -8,7 +8,7 @@ class SymbolsTable
     Lexema ** SymbolTable ;
     int nSymbols;
     int isInSymbolsTable(char*);
-    char ** paReserv; //FIXME: Break OOP; need a method
+    char ** paReserv; 
   public:
     SymbolsTable();
     char ** getPaReserv();

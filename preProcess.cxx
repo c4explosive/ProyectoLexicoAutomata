@@ -91,10 +91,14 @@ int separateStrs(char * str, char * newStr)
 	(ch == 0x2d && ant == 0x3c) ||
 	(ch == 0x3d && ant == 0x3d) ||
 	(ch == 0x3d && ant == 0x3e) ||
-	(ch == 0x3d && ant == 0x7e) ||
-	(ch == 0x2d && ant == 0x2d)
+	(ch == 0x3d && ant == 0x7e) 
 	)
 	    newStr[j]=ch;
+	else if(ch == 0x2d && ant == 0x2d)
+	{
+	    newStr[j]=ch;
+	    break;
+	}
 	else
 	{
 	    if(ch != 0x20)
