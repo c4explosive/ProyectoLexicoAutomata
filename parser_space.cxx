@@ -46,4 +46,3 @@ int main(int argc, char* argv[])
 //Arreglar lo del comentario pegado **   --foobarbaz
 //Arreglar comentario --
 //
-//OUT: Carta del desfile
