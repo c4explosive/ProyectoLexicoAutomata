@@ -9,7 +9,7 @@ private:
     int msgs;
     Lexema *lx;
     char ** stbWords;
-    int autoReserv();
+    int autoReserv();/* OBSOLETE vv */
     int autoAgrup();
     int autoArit();
     int autoAsig();

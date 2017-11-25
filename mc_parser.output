@@ -1,0 +1,642 @@
+Terminals unused in grammar
+
+   AGRUPACION
+   PALABRA_RESERVADA
+   COMENTARIO
+   INVALID
+   BLN
+   SPACE
+   NOTHING
+
+
+Grammar
+
+    0 $accept: S "end of file"
+
+    1 S: X
+    2  | Y
+    3  | Z
+    4  | A
+    5  | H
+
+    6 X: C AGPL AGPR FINAL_LINEA
+
+    7 C: PRS
+
+    8 Y: D AGPL L AGPR FINAL_LINEA
+
+    9 D: PRP
+
+   10 N: DIGITO N
+   11  | DIGITO
+
+   12 I: N DECI N
+
+   13 L: N O
+   14  | J O
+   15  | N
+   16  | J
+   17  | I
+   18  | I O
+
+   19 O: OPER_AR L
+
+   20 Z: COND AGPL B P B AGPR AGLL S AGLR
+
+   21 B: N
+   22  | J
+   23  | I
+
+   24 P: OPER_COMP
+
+   25 A: DVAR AGPL K AGPR FINAL_LINEA
+   26  | DVAR AGPL J AGPR FINAL_LINEA
+
+   27 J: VARIABLE_USER
+
+   28 K: J U L
+
+   29 H: K FINAL_LINEA
+
+   30 U: OPER_ASIG
+
+
+Terminals, with rules where they appear
+
+"end of file" (0) 0
+error (256)
+AGRUPACION (258)
+AGPL (259) 6 8 20 25 26
+AGPR (260) 6 8 20 25 26
+AGLL (261) 20
+AGLR (262) 20
+OPER_AR (263) 19
+OPER_ASIG (264) 30
+OPER_COMP (265) 24
+FINAL_LINEA (266) 6 8 25 26 29
+PALABRA_RESERVADA (267)
+PRS (268) 7
+PRP (269) 9
+COND (270) 20
+DVAR (271) 25 26
+COMENTARIO (272)
+DIGITO (273) 10 11
+VARIABLE_USER (274) 27
+INVALID (275)
+BLN (276)
+SPACE (277)
+NOTHING (278)
+DECI (279) 12
+
+
+Nonterminals, with rules where they appear
+
+$accept (25)
+    on left: 0
+S (26)
+    on left: 1 2 3 4 5, on right: 0 20
+X (27)
+    on left: 6, on right: 1
+C (28)
+    on left: 7, on right: 6
+Y (29)
+    on left: 8, on right: 2
+D (30)
+    on left: 9, on right: 8
+N (31)
+    on left: 10 11, on right: 10 12 13 15 21
+I (32)
+    on left: 12, on right: 17 18 23
+L (33)
+    on left: 13 14 15 16 17 18, on right: 8 19 28
+O (34)
+    on left: 19, on right: 13 14 18
+Z (35)
+    on left: 20, on right: 3
+B (36)
+    on left: 21 22 23, on right: 20
+P (37)
+    on left: 24, on right: 20
+A (38)
+    on left: 25 26, on right: 4
+J (39)
+    on left: 27, on right: 14 16 22 26 28
+K (40)
+    on left: 28, on right: 25 29
+H (41)
+    on left: 29, on right: 5
+U (42)
+    on left: 30, on right: 28
+
+
+State 0
+
+    0 $accept: . S "end of file"
+
+    PRS            shift, and go to state 1
+    PRP            shift, and go to state 2
+    COND           shift, and go to state 3
+    DVAR           shift, and go to state 4
+    VARIABLE_USER  shift, and go to state 5
+
+    S  go to state 6
+    X  go to state 7
+    C  go to state 8
+    Y  go to state 9
+    D  go to state 10
+    Z  go to state 11
+    A  go to state 12
+    J  go to state 13
+    K  go to state 14
+    H  go to state 15
+
+
+State 1
+
+    7 C: PRS .
+
+    $default  reduce using rule 7 (C)
+
+
+State 2
+
+    9 D: PRP .
+
+    $default  reduce using rule 9 (D)
+
+
+State 3
+
+   20 Z: COND . AGPL B P B AGPR AGLL S AGLR
+
+    AGPL  shift, and go to state 16
+
+
+State 4
+
+   25 A: DVAR . AGPL K AGPR FINAL_LINEA
+   26  | DVAR . AGPL J AGPR FINAL_LINEA
+
+    AGPL  shift, and go to state 17
+
+
+State 5
+
+   27 J: VARIABLE_USER .
+
+    $default  reduce using rule 27 (J)
+
+
+State 6
+
+    0 $accept: S . "end of file"
+
+    "end of file"  shift, and go to state 18
+
+
+State 7
+
+    1 S: X .
+
+    $default  reduce using rule 1 (S)
+
+
+State 8
+
+    6 X: C . AGPL AGPR FINAL_LINEA
+
+    AGPL  shift, and go to state 19
+
+
+State 9
+
+    2 S: Y .
+
+    $default  reduce using rule 2 (S)
+
+
+State 10
+
+    8 Y: D . AGPL L AGPR FINAL_LINEA
+
+    AGPL  shift, and go to state 20
+
+
+State 11
+
+    3 S: Z .
+
+    $default  reduce using rule 3 (S)
+
+
+State 12
+
+    4 S: A .
+
+    $default  reduce using rule 4 (S)
+
+
+State 13
+
+   28 K: J . U L
+
+    OPER_ASIG  shift, and go to state 21
+
+    U  go to state 22
+
+
+State 14
+
+   29 H: K . FINAL_LINEA
+
+    FINAL_LINEA  shift, and go to state 23
+
+
+State 15
+
+    5 S: H .
+
+    $default  reduce using rule 5 (S)
+
+
+State 16
+
+   20 Z: COND AGPL . B P B AGPR AGLL S AGLR
+
+    DIGITO         shift, and go to state 24
+    VARIABLE_USER  shift, and go to state 5
+
+    N  go to state 25
+    I  go to state 26
+    B  go to state 27
+    J  go to state 28
+
+
+State 17
+
+   25 A: DVAR AGPL . K AGPR FINAL_LINEA
+   26  | DVAR AGPL . J AGPR FINAL_LINEA
+
+    VARIABLE_USER  shift, and go to state 5
+
+    J  go to state 29
+    K  go to state 30
+
+
+State 18
+
+    0 $accept: S "end of file" .
+
+    $default  accept
+
+
+State 19
+
+    6 X: C AGPL . AGPR FINAL_LINEA
+
+    AGPR  shift, and go to state 31
+
+
+State 20
+
+    8 Y: D AGPL . L AGPR FINAL_LINEA
+
+    DIGITO         shift, and go to state 24
+    VARIABLE_USER  shift, and go to state 5
+
+    N  go to state 32
+    I  go to state 33
+    L  go to state 34
+    J  go to state 35
+
+
+State 21
+
+   30 U: OPER_ASIG .
+
+    $default  reduce using rule 30 (U)
+
+
+State 22
+
+   28 K: J U . L
+
+    DIGITO         shift, and go to state 24
+    VARIABLE_USER  shift, and go to state 5
+
+    N  go to state 32
+    I  go to state 33
+    L  go to state 36
+    J  go to state 35
+
+
+State 23
+
+   29 H: K FINAL_LINEA .
+
+    $default  reduce using rule 29 (H)
+
+
+State 24
+
+   10 N: DIGITO . N
+   11  | DIGITO .
+
+    DIGITO  shift, and go to state 24
+
+    $default  reduce using rule 11 (N)
+
+    N  go to state 37
+
+
+State 25
+
+   12 I: N . DECI N
+   21 B: N .
+
+    DECI  shift, and go to state 38
+
+    $default  reduce using rule 21 (B)
+
+
+State 26
+
+   23 B: I .
+
+    $default  reduce using rule 23 (B)
+
+
+State 27
+
+   20 Z: COND AGPL B . P B AGPR AGLL S AGLR
+
+    OPER_COMP  shift, and go to state 39
+
+    P  go to state 40
+
+
+State 28
+
+   22 B: J .
+
+    $default  reduce using rule 22 (B)
+
+
+State 29
+
+   26 A: DVAR AGPL J . AGPR FINAL_LINEA
+   28 K: J . U L
+
+    AGPR       shift, and go to state 41
+    OPER_ASIG  shift, and go to state 21
+
+    U  go to state 22
+
+
+State 30
+
+   25 A: DVAR AGPL K . AGPR FINAL_LINEA
+
+    AGPR  shift, and go to state 42
+
+
+State 31
+
+    6 X: C AGPL AGPR . FINAL_LINEA
+
+    FINAL_LINEA  shift, and go to state 43
+
+
+State 32
+
+   12 I: N . DECI N
+   13 L: N . O
+   15  | N .
+
+    OPER_AR  shift, and go to state 44
+    DECI     shift, and go to state 38
+
+    $default  reduce using rule 15 (L)
+
+    O  go to state 45
+
+
+State 33
+
+   17 L: I .
+   18  | I . O
+
+    OPER_AR  shift, and go to state 44
+
+    $default  reduce using rule 17 (L)
+
+    O  go to state 46
+
+
+State 34
+
+    8 Y: D AGPL L . AGPR FINAL_LINEA
+
+    AGPR  shift, and go to state 47
+
+
+State 35
+
+   14 L: J . O
+   16  | J .
+
+    OPER_AR  shift, and go to state 44
+
+    $default  reduce using rule 16 (L)
+
+    O  go to state 48
+
+
+State 36
+
+   28 K: J U L .
+
+    $default  reduce using rule 28 (K)
+
+
+State 37
+
+   10 N: DIGITO N .
+
+    $default  reduce using rule 10 (N)
+
+
+State 38
+
+   12 I: N DECI . N
+
+    DIGITO  shift, and go to state 24
+
+    N  go to state 49
+
+
+State 39
+
+   24 P: OPER_COMP .
+
+    $default  reduce using rule 24 (P)
+
+
+State 40
+
+   20 Z: COND AGPL B P . B AGPR AGLL S AGLR
+
+    DIGITO         shift, and go to state 24
+    VARIABLE_USER  shift, and go to state 5
+
+    N  go to state 25
+    I  go to state 26
+    B  go to state 50
+    J  go to state 28
+
+
+State 41
+
+   26 A: DVAR AGPL J AGPR . FINAL_LINEA
+
+    FINAL_LINEA  shift, and go to state 51
+
+
+State 42
+
+   25 A: DVAR AGPL K AGPR . FINAL_LINEA
+
+    FINAL_LINEA  shift, and go to state 52
+
+
+State 43
+
+    6 X: C AGPL AGPR FINAL_LINEA .
+
+    $default  reduce using rule 6 (X)
+
+
+State 44
+
+   19 O: OPER_AR . L
+
+    DIGITO         shift, and go to state 24
+    VARIABLE_USER  shift, and go to state 5
+
+    N  go to state 32
+    I  go to state 33
+    L  go to state 53
+    J  go to state 35
+
+
+State 45
+
+   13 L: N O .
+
+    $default  reduce using rule 13 (L)
+
+
+State 46
+
+   18 L: I O .
+
+    $default  reduce using rule 18 (L)
+
+
+State 47
+
+    8 Y: D AGPL L AGPR . FINAL_LINEA
+
+    FINAL_LINEA  shift, and go to state 54
+
+
+State 48
+
+   14 L: J O .
+
+    $default  reduce using rule 14 (L)
+
+
+State 49
+
+   12 I: N DECI N .
+
+    $default  reduce using rule 12 (I)
+
+
+State 50
+
+   20 Z: COND AGPL B P B . AGPR AGLL S AGLR
+
+    AGPR  shift, and go to state 55
+
+
+State 51
+
+   26 A: DVAR AGPL J AGPR FINAL_LINEA .
+
+    $default  reduce using rule 26 (A)
+
+
+State 52
+
+   25 A: DVAR AGPL K AGPR FINAL_LINEA .
+
+    $default  reduce using rule 25 (A)
+
+
+State 53
+
+   19 O: OPER_AR L .
+
+    $default  reduce using rule 19 (O)
+
+
+State 54
+
+    8 Y: D AGPL L AGPR FINAL_LINEA .
+
+    $default  reduce using rule 8 (Y)
+
+
+State 55
+
+   20 Z: COND AGPL B P B AGPR . AGLL S AGLR
+
+    AGLL  shift, and go to state 56
+
+
+State 56
+
+   20 Z: COND AGPL B P B AGPR AGLL . S AGLR
+
+    PRS            shift, and go to state 1
+    PRP            shift, and go to state 2
+    COND           shift, and go to state 3
+    DVAR           shift, and go to state 4
+    VARIABLE_USER  shift, and go to state 5
+
+    S  go to state 57
+    X  go to state 7
+    C  go to state 8
+    Y  go to state 9
+    D  go to state 10
+    Z  go to state 11
+    A  go to state 12
+    J  go to state 13
+    K  go to state 14
+    H  go to state 15
+
+
+State 57
+
+   20 Z: COND AGPL B P B AGPR AGLL S . AGLR
+
+    AGLR  shift, and go to state 58
+
+
+State 58
+
+   20 Z: COND AGPL B P B AGPR AGLL S AGLR .
+
+    $default  reduce using rule 20 (Z)

@@ -1,0 +1,12 @@
+mente Bs
+test r Bs
+B sdj Bs a djs sa d B
+sakd B Bs Bs BBs
+Bs Bs test Bs Skywalker
+sa sa
+
+Es el conjunto finito de símbolos o caracteres que compondrán el lenguaje para este compilado. El mismo estará compuesto por el conjunto de letras (a-z), los dígitos del (0-9) y por los símbolos (+,-,=,>,<,:,{,},(,)).
+subir bajar subir 3 pisos
+abrir;
+cerrar(8);
+;;;;;

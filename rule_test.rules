@@ -1,0 +1,14 @@
+Rules For Test:
+
+PALABRA_RESERVADA {driver.add_pRes(); }
+  | AGRUPACION   { driver.add_agrup(); }
+  | OPER_AR   { driver.add_oarit(); }
+  | OPER_ASIG    { driver.add_oasig(); }
+  | OPER_COMP { driver.add_ocomp(); }
+  | FINAL_LINEA    { driver.add_flinea(); } //Nuevo Token
+  | COMENTARIO { driver.add_comen(); }
+  | DIGITO { driver.add_digit(); }
+  | VARIABLE_USER {driver.add_varus();}
+  | INVALID {driver.add_err(); }
+  | MANTRA {driver.add_line(); }
+  | SPACE

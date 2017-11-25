@@ -1,0 +1,6 @@
+texto nuevo
+subir;
+return bajar subir main.
+hardcore!""
+test. = ~=
+pointer * bs = NULL;
